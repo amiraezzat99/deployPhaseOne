@@ -122,8 +122,8 @@ export const createOrder = async (req, res, next) => {
             date: order.createdAt
         };
 
-        await createInvoice(invoice, "invoice.pdf");
-        await sendEmail({ to: req.user.email, message: "This is your order invoice", subject: "Order Invoice", attachments: [{ path: "invoice.pdf", contentType: "application/json" }] });
+        // await createInvoice(invoice, "invoice.pdf");
+        // await sendEmail({ to: req.user.email, message: "This is your order invoice", subject: "Order Invoice", attachments: [{ path: "invoice.pdf", contentType: "application/json" }] });
     }
     return res.status(201).json({ message: "Done", order })
 
