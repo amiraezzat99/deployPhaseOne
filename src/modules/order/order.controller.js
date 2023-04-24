@@ -225,7 +225,7 @@ export const webHook = async (req, res, next) => {
       .status(400)
       .json({ message: 'you payment is failed please try again later' })
   }
-  await orderModel.updateOne({ _id: orderId }, { orderStatus: 'Confirmed' })
+  await orderModel.updateOne({ _id: orderId }, { orderStatus: 'confirmed' })
   return res.status(200).json({ message: 'you payment is fsuccessed' })
   // Handle the event
   // switch (event.type) {
