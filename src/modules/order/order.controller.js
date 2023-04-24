@@ -205,15 +205,14 @@ export const createOrder = async (req, res, next) => {
 export const webHook = async (req, res, next) => {
   const stripe = new Stripe(process.env.SERCRET_KEY)
   const endpointSecret = process.env.EVENT_SECRET
-  const sig = request.headers['stripe-signature']
+  const sig = req.headers['stripe-signature']
 
   let event
 
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret)
   } catch (err) {
-    res.status(400).send(`Webhook Error: ${err.message}`)
-    return
+    return res.status(400).send(`Webhook Error: ${err.message}`)
   }
   const { orderId } = event.data.object.metadata
   if (event.type != 'checkout.session.completed') {
